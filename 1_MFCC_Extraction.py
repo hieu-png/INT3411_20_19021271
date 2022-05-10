@@ -2,9 +2,9 @@ import IPython.display as ipd
 import librosa.display
 import matplotlib.pyplot as plt
 import numpy as np
-
+from config import mfcc_file_name
 #Reading 100 wav file to extract mel frequency cepstral coefficients
-f  = open('MFCCresults.txt','w')
+f = open(mfcc_file_name, 'w')
 #Just writing the header collumn
 f.writelines('command\tcoefficients\ttime frames\n')
 print('Starting creating MFCC results')
@@ -16,7 +16,9 @@ for index in range(1, 101):
     #print(command_array)
     for command in command_array:
         #print(command[0])
+
         ipd.Audio(audio_file_path)
+
         signal, sr = librosa.load(
         path=audio_file_path,
         offset= float(command[0]),
@@ -26,7 +28,6 @@ for index in range(1, 101):
 
         delta_mfccs = librosa.feature.delta(mfccs)
         delta2_mfccs = librosa.feature.delta(mfccs, order=2)
-
         mfccs_features = np.concatenate((mfccs, delta_mfccs, delta2_mfccs))
     
         f.writelines('%s\t%d\t%d\n' % (
