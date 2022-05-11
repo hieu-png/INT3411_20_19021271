@@ -14,9 +14,14 @@ with open(mfcc_file_name) as file:
             first_line = False
         else:
             mfcc_data.append(line.split("\t"))
-        
 
 
-
-
-
+N = 500
+D = len(mfcc_data)
+states = []
+model = hmm.GaussianHMM(n_components=N, covariance_type="full")
+model.transmat_ = np.ones((N, N)) / N
+model.startprob_ = np.ones(N) / N
+fit = model.fit(mfcc_data.T)
+z = fit.decode(mfcc_data.T, algorithm='viterbi')[1]
+states.append(z)

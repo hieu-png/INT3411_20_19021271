@@ -19,17 +19,15 @@ for index in range(1, 101):
 
         ipd.Audio(audio_file_path)
 
-        signal, sr = librosa.load(
+        y, sr = librosa.load(
         path=audio_file_path,
         offset= float(command[0]),
         duration=float(command[1])-float(command[0])
         )
-        mfccs = librosa.feature.mfcc(y=signal, n_mfcc=13, sr=sr)
-
+        mfccs = librosa.feature.mfcc(y=y, n_mfcc=13, sr=sr)
         delta_mfccs = librosa.feature.delta(mfccs)
         delta2_mfccs = librosa.feature.delta(mfccs, order=2)
         mfccs_features = np.concatenate((mfccs, delta_mfccs, delta2_mfccs))
-    
         f.writelines('%s\t%d\t%d\n' % (
             command[2], mfccs_features.shape[0], mfccs_features.shape[1]))
 print('Finished creating MFCC results')
