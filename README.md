@@ -19,4 +19,13 @@ Hạn nộp: Thứ Tư, 11/05/2022 trước giờ học 13:00 chiều
 
 5. Trong README.md của github có video demo
 
-Demo
+## Demo
+
+MFCC https://youtu.be/3E_D5BXR-D4
+
+DTW https://youtu.be/mUB7NZ4gtXg
+
+HMM 
+
+
+
